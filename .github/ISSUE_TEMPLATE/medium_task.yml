@@ -12,26 +12,9 @@ body:
 
         ### 作成手順
         1. **親の大タスク Issue** を開く
-        2. 右サイドバーまたは「...」メニューから **「Create sub-issue」** を選択
-        3. このテンプレートを選んで記入する
+        2. **「Create sub-issue」** からこのテンプレートを選ぶ
+        3. 成果物の定義を記入する
         4. Projects で `タスク階層=中タスク`・`Status=未着手` を設定する
-
-        > 小タスクはこの中タスクの Sub-Issue として作成します。
-
-  - type: input
-    id: parent_issue
-    attributes:
-      label: "親の大タスク Issue 番号"
-      description: "例：#2 の場合は「2」と入力"
-      placeholder: "2"
-    validations:
-      required: false
-
-  - type: markdown
-    attributes:
-      value: |
-        ---
-        ### この中タスクで作るもの
 
   - type: textarea
     id: deliverable
@@ -42,33 +25,6 @@ body:
     validations:
       required: true
 
-  - type: markdown
-    attributes:
-      value: |
-        ---
-        ### 小タスク一覧
-        Issue 作成後、各行を **Sub-Issue（小タスク）** として作成し、Issue 番号を追記してください。
-        1つの小タスクは **15分〜3時間** で完了する粒度が目安です。
-
-  - type: textarea
-    id: small_tasks
-    attributes:
-      label: "小タスク一覧"
-      value: |
-        | # | 小タスク名 | Status | 予想時間 | Sub-Issue |
-        |---|------------|--------|----------|-----------|
-        | 1 | | 未着手 | | # |
-        | 2 | | 未着手 | | # |
-        | 3 | | 未着手 | | # |
-    validations:
-      required: false
-
-  - type: markdown
-    attributes:
-      value: |
-        ---
-        ### 作成後チェックリスト
-
   - type: checkboxes
     id: checklist
     attributes:
@@ -77,6 +33,4 @@ body:
         - label: "親の大タスクから Sub-Issue として作成した"
           required: false
         - label: "Projects の「タスク階層」を「中タスク」に設定した"
-          required: false
-        - label: "小タスクを Sub-Issue として分解した"
           required: false
