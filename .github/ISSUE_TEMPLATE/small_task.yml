@@ -23,21 +23,6 @@ body:
         | 作業完了時 | `実時間（分）` を記入 → Status →「完了」 |
         | 予想と差がある場合 | `予想との差異理由` を記入 |
 
-  - type: input
-    id: parent_issue
-    attributes:
-      label: "親の中タスク Issue 番号"
-      description: "例：#5 の場合は「5」と入力"
-      placeholder: "5"
-    validations:
-      required: false
-
-  - type: markdown
-    attributes:
-      value: |
-        ---
-        ### 作業内容
-
   - type: textarea
     id: work_content
     attributes:
