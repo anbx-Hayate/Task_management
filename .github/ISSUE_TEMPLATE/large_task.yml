@@ -17,10 +17,9 @@ body:
         | ② | 届け先 |
         | ③ | 成功状態（相手のゴール） |
         | ④ | 成果物 |
-        | ⑤ | 中タスク一覧（作成後に Sub-Issue で分解） |
-        | ⑥ | 振り返り（完了後に記入） |
+        | ⑤ | 振り返り（完了後に記入） |
 
-        > **作成後の作業：** Projects で `タスク階層=大タスク`・`Status=未着手` を設定してください。
+        > **作成後：** 届け先・タスク階層・Status は **タスク管理ボードへ自動反映** されます。
 
   - type: markdown
     attributes:
@@ -55,6 +54,7 @@ body:
     id: recipient_type
     attributes:
       label: "② 届け先の種類"
+      description: タスク管理ボードの「届け先」へ自動反映されます
       options:
         - 上司
         - クライアント
@@ -125,29 +125,7 @@ body:
     attributes:
       value: |
         ---
-        ### ⑤ 中タスク一覧
-        大タスクを **成果物単位** に分解します。
-        Issue 作成後、各行を **Sub-Issue（中タスク）** として作成し、Issue 番号を追記してください。
-
-  - type: textarea
-    id: medium_tasks
-    attributes:
-      label: "⑤ 中タスク一覧"
-      description: 2〜5個程度に分解するのが目安です
-      value: |
-        | # | 中タスク名 | Status | 担当 | Sub-Issue |
-        |---|------------|--------|------|-----------|
-        | 1 | | 未着手 | | # |
-        | 2 | | 未着手 | | # |
-        | 3 | | 未着手 | | # |
-    validations:
-      required: false
-
-  - type: markdown
-    attributes:
-      value: |
-        ---
-        ### ⑥ 振り返り
+        ### ⑤ 振り返り
         > 全小タスク完了後に記入してください。作成時は空欄のままで構いません。
 
   - type: textarea
@@ -187,20 +165,12 @@ body:
     validations:
       required: false
 
-  - type: markdown
-    attributes:
-      value: |
-        ---
-        ### 作成後チェックリスト
-
   - type: checkboxes
     id: checklist
     attributes:
       label: "作成後に確認すること"
       options:
-        - label: "Projects の「タスク階層」を「大タスク」に設定した"
+        - label: "親の大タスクから Sub-Issue として中タスクを作成した"
           required: false
-        - label: "Projects の「Status」を「未着手」に設定した"
-          required: false
-        - label: "中タスクを Sub-Issue として分解した"
+        - label: "タスク管理ボードに届け先・タスク階層が反映された"
           required: false

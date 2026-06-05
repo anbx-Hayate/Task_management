@@ -11,13 +11,11 @@ permissions:
 jobs:
   sync:
     runs-on: ubuntu-latest
-    # ユーザー所有 Projects への書き込みには PAT（project スコープ）が必要
-    # リポジトリ Secrets に PROJECTS_TOKEN を登録してください
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Sync small task fields to Projects
+      - name: Sync issue template fields to Projects
         uses: actions/github-script@v7
         env:
           PROJECTS_TOKEN: ${{ secrets.PROJECTS_TOKEN }}
@@ -32,25 +30,25 @@ jobs:
             }
             const fs = require('fs');
             const path = require('path');
-            const { syncIssueToProject } = await import(
+            const { syncIssueToProject, findSyncConfig } = await import(
               path.join(process.env.GITHUB_WORKSPACE, '.github/scripts/sync-project-fields.mjs')
             );
 
             const issue = context.payload.issue;
-            const labels = issue.labels.map((l) => l.name);
-            const config = JSON.parse(
+            const allConfig = JSON.parse(
               fs.readFileSync('.github/project-sync-config.json', 'utf8')
             );
+            const config = findSyncConfig(allConfig, issue.labels);
 
-            if (!labels.includes(config.triggerLabel)) {
-              core.info(`Skip: label "${config.triggerLabel}" not found`);
+            if (!config) {
+              core.info('Skip: 大タスク / 小タスク ラベルなし');
               return;
             }
 
             const [owner, repo] = context.payload.repository.full_name.split('/');
             const updates = await syncIssueToProject({
               graphql: github.graphql,
-              config,
+              config: { projectId: allConfig.projectId, ...config },
               owner,
               repo,
               issueNumber: issue.number,
@@ -60,5 +58,5 @@ jobs:
             if (updates.length === 0) {
               core.warning('No project fields were updated. Check issue body format.');
             } else {
-              core.info(`Updated: ${updates.join(', ')}`);
+              core.info(`Updated (${config.triggerLabel}): ${updates.join(', ')}`);
             }

@@ -163,3 +163,12 @@ export async function syncIssueToProject({
 
   return updates;
 }
+
+/** ラベルに一致する同期設定を返す */
+export function findSyncConfig(allConfig, labels) {
+  const labelNames = labels.map((l) => (typeof l === "string" ? l : l.name));
+  for (const config of allConfig.configs) {
+    if (labelNames.includes(config.triggerLabel)) return config;
+  }
+  return null;
+}

@@ -1,14 +1,29 @@
 {
   "projectId": "PVT_kwHOEOc91s4BZxwG",
-  "triggerLabel": "小タスク",
-  "parseFields": [
-    { "issueHeading": "インパクト", "projectField": "インパクト" },
-    { "issueHeading": "時間負荷", "projectField": "時間負荷" },
-    { "issueHeading": "気軽さ", "projectField": "気軽さ" },
-    { "issueHeading": "予想時間", "projectField": "予想時間" }
-  ],
-  "defaults": [
-    { "projectField": "タスク階層", "value": "小タスク" },
-    { "projectField": "Status", "value": "未着手" }
+  "configs": [
+    {
+      "triggerLabel": "大タスク",
+      "parseFields": [
+        { "issueHeading": "② 届け先の種類", "projectField": "届け先" }
+      ],
+      "defaults": [
+        { "projectField": "タスク階層", "value": "大タスク" },
+        { "projectField": "Status", "value": "未着手" },
+        { "projectField": "振り返り済み", "value": "未実施" }
+      ]
+    },
+    {
+      "triggerLabel": "小タスク",
+      "parseFields": [
+        { "issueHeading": "インパクト", "projectField": "インパクト" },
+        { "issueHeading": "時間負荷", "projectField": "時間負荷" },
+        { "issueHeading": "気軽さ", "projectField": "気軽さ" },
+        { "issueHeading": "予想時間", "projectField": "予想時間" }
+      ],
+      "defaults": [
+        { "projectField": "タスク階層", "value": "小タスク" },
+        { "projectField": "Status", "value": "未着手" }
+      ]
+    }
   ]
 }

@@ -10,7 +10,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { syncIssueToProject } from "./sync-project-fields.mjs";
+import { findSyncConfig, syncIssueToProject } from "./sync-project-fields.mjs";
 
 function findGh() {
   const candidates = [
@@ -31,7 +31,7 @@ function findGh() {
 
 const GH = findGh();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const config = JSON.parse(
+const allConfig = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../project-sync-config.json"), "utf8")
 );
 
@@ -67,14 +67,15 @@ const issueJson = execSync(
 );
 const issue = JSON.parse(issueJson);
 
-if (!issue.labels.some((l) => l.name === config.triggerLabel)) {
-  console.error(`Issue #${issueNumber} にラベル「${config.triggerLabel}」がありません`);
+const config = findSyncConfig(allConfig, issue.labels);
+if (!config) {
+  console.error(`Issue #${issueNumber} に大タスク / 小タスク ラベルがありません`);
   process.exit(1);
 }
 
 const updates = await syncIssueToProject({
   graphql: ghGraphql,
-  config,
+  config: { projectId: allConfig.projectId, ...config },
   owner,
   repo,
   issueNumber,
