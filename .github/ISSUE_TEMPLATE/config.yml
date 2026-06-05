@@ -3,6 +3,9 @@ contact_links:
   - name: "📖 テンプレートの使い方"
     url: https://github.com/anbx-Hayate/Task_management/blob/main/docs/ISSUE_TEMPLATE_GUIDE.md
     about: 大・中・小タスクの作成手順と記入例を確認する
+  - name: "🔄 ボード自動同期の設定"
+    url: https://github.com/anbx-Hayate/Task_management/blob/main/docs/PROJECT_SYNC_SETUP.md
+    about: 時間負荷・気軽さ・予想時間をProjectsへ自動反映する設定手順
   - name: "📋 運用ルール（README）"
     url: https://github.com/anbx-Hayate/Task_management#運用ルール
     about: タスク管理の運用フロー・Projects 設定手順

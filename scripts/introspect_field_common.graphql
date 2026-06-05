@@ -1,0 +1,11 @@
+query {
+  __type(name: "ProjectV2FieldCommon") {
+    possibleTypes {
+      name
+    }
+    fields {
+      name
+      type { name kind }
+    }
+  }
+}

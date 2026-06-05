@@ -1,0 +1,13 @@
+mutation($viewId: ID!) {
+  updateProjectV2View(input: {
+    viewId: $viewId
+    name: "全体ボード"
+    layout: BOARD_LAYOUT
+  }) {
+    projectV2View {
+      id
+      name
+      layout
+    }
+  }
+}

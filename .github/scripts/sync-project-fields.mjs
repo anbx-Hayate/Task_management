@@ -2,6 +2,10 @@
  * Issue テンプレートの値を GitHub Projects フィールドへ同期する
  */
 
+function sq(query) {
+  return query.replace(/\s+/g, " ").trim();
+}
+
 export function parseIssueField(body, heading) {
   if (!body) return null;
   const escaped = heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -37,7 +41,7 @@ export async function getProjectFields(graphql, projectId) {
       }
     }
   `;
-  const data = await graphql(query, { projectId });
+  const data = await graphql(sq(query), { projectId });
   const map = new Map();
   for (const field of data.node.fields.nodes) {
     if (field?.name) map.set(field.name, field);
@@ -53,7 +57,7 @@ export async function getIssueNodeId(graphql, owner, repo, issueNumber) {
       }
     }
   `;
-  const data = await graphql(query, { owner, repo, number: issueNumber });
+  const data = await graphql(sq(query), { owner, repo, number: issueNumber });
   return data.repository.issue.id;
 }
 
@@ -72,7 +76,7 @@ export async function getOrAddProjectItem(graphql, projectId, contentId) {
       }
     }
   `;
-  const found = await graphql(findQuery, { contentId });
+  const found = await graphql(sq(findQuery), { contentId });
   const existing = found.node.projectItems.nodes.find(
     (item) => item.project.id === projectId
   );
@@ -85,7 +89,7 @@ export async function getOrAddProjectItem(graphql, projectId, contentId) {
       }
     }
   `;
-  const added = await graphql(addMutation, { projectId, contentId });
+  const added = await graphql(sq(addMutation), { projectId, contentId });
   return added.addProjectV2ItemById.item.id;
 }
 
@@ -108,7 +112,7 @@ export async function setSingleSelectField(
       }
     }
   `;
-  await graphql(mutation, { projectId, itemId, fieldId, optionId });
+  await graphql(sq(mutation), { projectId, itemId, fieldId, optionId });
 }
 
 export async function syncIssueToProject({
