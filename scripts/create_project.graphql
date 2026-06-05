@@ -1,0 +1,9 @@
+mutation($ownerId: ID!, $title: String!) {
+  createProjectV2(input: { ownerId: $ownerId, title: $title }) {
+    projectV2 {
+      id
+      title
+      url
+    }
+  }
+}

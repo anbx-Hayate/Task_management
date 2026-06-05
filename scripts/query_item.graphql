@@ -1,0 +1,28 @@
+query($projectId: ID!, $itemId: ID!) {
+  node(id: $projectId) {
+    ... on ProjectV2 {
+      item(id: $itemId) {
+        id
+        fieldValues(first: 20) {
+          nodes {
+            ... on ProjectV2ItemFieldSingleSelectValue {
+              name
+              field {
+                ... on ProjectV2SingleSelectField {
+                  name
+                }
+              }
+            }
+          }
+        }
+        content {
+          ... on Issue {
+            number
+            title
+            url
+          }
+        }
+      }
+    }
+  }
+}

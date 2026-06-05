@@ -2,6 +2,23 @@
 
 このドキュメントは [anbx-Hayate/Task_management](https://github.com/anbx-Hayate/Task_management) の Projects 初期設定手順です。
 
+## 自動セットアップ（推奨）
+
+GitHub CLI (`gh`) がインストール・認証済みの場合、`scripts/` 内の GraphQL ファイルを使って自動設定できます。
+
+**すでに以下は設定済みです（2026-06-05 実施）：**
+
+| 項目 | 状態 | URL |
+|------|------|-----|
+| プロジェクト | 作成済み | https://github.com/users/anbx-Hayate/projects/3 |
+| ラベル | 作成済み | 大タスク / 中タスク / 小タスク / 振り返り待ち |
+| カスタムフィールド | 作成済み | 下記一覧参照 |
+| 初期大タスク Issue | 作成済み | https://github.com/anbx-Hayate/Task_management/issues/2 |
+
+再セットアップが必要な場合は `scripts/setup_project.py`（Python 要）または `scripts/*.graphql` を参照してください。
+
+---
+
 ## 1. プロジェクト作成
 
 1. リポジトリの **Projects** タブを開く

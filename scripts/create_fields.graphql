@@ -1,0 +1,135 @@
+mutation($projectId: ID!) {
+  f1: createProjectV2Field(
+    input: {
+      projectId: $projectId
+      dataType: SINGLE_SELECT
+      name: "タスク階層"
+      singleSelectOptions: [
+        { name: "大タスク", color: PURPLE, description: "" }
+        { name: "中タスク", color: BLUE, description: "" }
+        { name: "小タスク", color: GREEN, description: "" }
+      ]
+    }
+  ) {
+    projectV2Field { ... on ProjectV2SingleSelectField { id name } }
+  }
+  f2: createProjectV2Field(
+    input: {
+      projectId: $projectId
+      dataType: SINGLE_SELECT
+      name: "インパクト"
+      singleSelectOptions: [
+        { name: "大", color: RED, description: "" }
+        { name: "中", color: YELLOW, description: "" }
+        { name: "小", color: GRAY, description: "" }
+      ]
+    }
+  ) {
+    projectV2Field { ... on ProjectV2SingleSelectField { id name } }
+  }
+  f3: createProjectV2Field(
+    input: {
+      projectId: $projectId
+      dataType: SINGLE_SELECT
+      name: "時間負荷"
+      singleSelectOptions: [
+        { name: "すぐ終わる", color: GREEN, description: "" }
+        { name: "普通", color: YELLOW, description: "" }
+        { name: "重い", color: RED, description: "" }
+      ]
+    }
+  ) {
+    projectV2Field { ... on ProjectV2SingleSelectField { id name } }
+  }
+  f4: createProjectV2Field(
+    input: {
+      projectId: $projectId
+      dataType: SINGLE_SELECT
+      name: "気軽さ"
+      singleSelectOptions: [
+        { name: "楽", color: GREEN, description: "" }
+        { name: "普通", color: YELLOW, description: "" }
+        { name: "気重", color: RED, description: "" }
+      ]
+    }
+  ) {
+    projectV2Field { ... on ProjectV2SingleSelectField { id name } }
+  }
+  f5: createProjectV2Field(
+    input: {
+      projectId: $projectId
+      dataType: SINGLE_SELECT
+      name: "予想時間"
+      singleSelectOptions: [
+        { name: "15分", color: GRAY, description: "" }
+        { name: "30分", color: GRAY, description: "" }
+        { name: "1時間", color: GRAY, description: "" }
+        { name: "3時間", color: GRAY, description: "" }
+        { name: "それ以上", color: GRAY, description: "" }
+      ]
+    }
+  ) {
+    projectV2Field { ... on ProjectV2SingleSelectField { id name } }
+  }
+  f6: createProjectV2Field(
+    input: { projectId: $projectId, dataType: NUMBER, name: "実時間（分）" }
+  ) {
+    projectV2Field { ... on ProjectV2Field { id name } }
+  }
+  f7: createProjectV2Field(
+    input: {
+      projectId: $projectId
+      dataType: SINGLE_SELECT
+      name: "予想との差異理由"
+      singleSelectOptions: [
+        { name: "差異なし", color: GRAY, description: "" }
+        { name: "調査時間が増加", color: YELLOW, description: "" }
+        { name: "手戻り発生", color: RED, description: "" }
+        { name: "レビュー対応発生", color: YELLOW, description: "" }
+        { name: "想定以上に難しかった", color: RED, description: "" }
+        { name: "その他", color: GRAY, description: "" }
+      ]
+    }
+  ) {
+    projectV2Field { ... on ProjectV2SingleSelectField { id name } }
+  }
+  f8: createProjectV2Field(
+    input: { projectId: $projectId, dataType: TEXT, name: "差異理由（補足）" }
+  ) {
+    projectV2Field { ... on ProjectV2Field { id name } }
+  }
+  f9: createProjectV2Field(
+    input: {
+      projectId: $projectId
+      dataType: SINGLE_SELECT
+      name: "届け先"
+      singleSelectOptions: [
+        { name: "上司", color: BLUE, description: "" }
+        { name: "クライアント", color: PURPLE, description: "" }
+        { name: "チーム", color: GREEN, description: "" }
+        { name: "自分", color: GRAY, description: "" }
+        { name: "その他", color: YELLOW, description: "" }
+      ]
+    }
+  ) {
+    projectV2Field { ... on ProjectV2SingleSelectField { id name } }
+  }
+  f10: createProjectV2Field(
+    input: { projectId: $projectId, dataType: DATE, name: "完了日" }
+  ) {
+    projectV2Field { ... on ProjectV2Field { id name } }
+  }
+  f11: createProjectV2Field(
+    input: {
+      projectId: $projectId
+      dataType: SINGLE_SELECT
+      name: "振り返り済み"
+      singleSelectOptions: [
+        { name: "未実施", color: GRAY, description: "" }
+        { name: "実施済み", color: GREEN, description: "" }
+      ]
+    }
+  ) {
+    projectV2Field { ... on ProjectV2SingleSelectField { id name } }
+  }
+}

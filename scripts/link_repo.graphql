@@ -1,0 +1,8 @@
+mutation($projectId: ID!, $repoId: ID!) {
+  linkProjectV2ToRepository(input: { projectId: $projectId, repositoryId: $repoId }) {
+    repository {
+      id
+      name
+    }
+  }
+}

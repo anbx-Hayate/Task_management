@@ -1,0 +1,24 @@
+mutation($fieldId: ID!) {
+  updateProjectV2Field(
+    input: {
+      fieldId: $fieldId
+      singleSelectOptions: [
+        { name: "未着手", color: GRAY, description: "Not started" }
+        { name: "着手中", color: YELLOW, description: "In progress" }
+        { name: "完了", color: GREEN, description: "Done" }
+        { name: "保留", color: ORANGE, description: "On hold" }
+      ]
+    }
+  ) {
+    projectV2Field {
+      ... on ProjectV2SingleSelectField {
+        id
+        name
+        options {
+          id
+          name
+        }
+      }
+    }
+  }
+}

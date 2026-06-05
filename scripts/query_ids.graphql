@@ -1,0 +1,10 @@
+query {
+  viewer {
+    id
+    login
+  }
+  repository(owner: "anbx-Hayate", name: "Task_management") {
+    id
+    name
+  }
+}
