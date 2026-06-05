@@ -14,7 +14,7 @@ body:
         1. **親の中タスク Issue** を開く
         2. **「Create sub-issue」** からこのテンプレートを選ぶ
         3. 下の評価軸・予想時間を入力する
-        4. Projects で `タスク階層=小タスク`・`Status=未着手` を設定する
+        4. 作成後、**タスク管理ボードへ自動反映**されます（手動設定不要）
 
         ### 作業の進め方
         | タイミング | やること |
@@ -42,7 +42,7 @@ body:
         ---
         ### タスク評価軸
         優先順位と作業時間帯（午前＝頭を使う作業 / 午後＝機械的作業）の判断に使います。
-        Projects にも同じ値を設定してください。
+        入力した値は **タスク管理ボードに自動で反映** されます。
 
   - type: dropdown
     id: impact
@@ -84,7 +84,7 @@ body:
     id: estimated_time
     attributes:
       label: "予想時間"
-      description: 作業前の見積もり。Projects にも同じ値を設定する
+      description: 作業前の見積もり。タスク管理ボードへ自動反映されます
       options:
         - 15分
         - 30分
@@ -128,7 +128,5 @@ body:
       options:
         - label: "親の中タスクから Sub-Issue として作成した"
           required: false
-        - label: "Projects の「タスク階層」を「小タスク」に設定した"
-          required: false
-        - label: "Projects にインパクト・時間負荷・気軽さ・予想時間を設定した"
+        - label: "タスク管理ボードに時間負荷・気軽さ・予想時間が反映された"
           required: false

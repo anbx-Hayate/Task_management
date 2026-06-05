@@ -1,0 +1,14 @@
+{
+  "projectId": "PVT_kwHOEOc91s4BZxwG",
+  "triggerLabel": "小タスク",
+  "parseFields": [
+    { "issueHeading": "インパクト", "projectField": "インパクト" },
+    { "issueHeading": "時間負荷", "projectField": "時間負荷" },
+    { "issueHeading": "気軽さ", "projectField": "気軽さ" },
+    { "issueHeading": "予想時間", "projectField": "予想時間" }
+  ],
+  "defaults": [
+    { "projectField": "タスク階層", "value": "小タスク" },
+    { "projectField": "Status", "value": "未着手" }
+  ]
+}

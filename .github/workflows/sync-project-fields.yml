@@ -1,0 +1,53 @@
+name: Sync Issue fields to Projects
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  issues: read
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sync small task fields to Projects
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const { syncIssueToProject } = await import(
+              path.join(process.env.GITHUB_WORKSPACE, '.github/scripts/sync-project-fields.mjs')
+            );
+
+            const issue = context.payload.issue;
+            const labels = issue.labels.map((l) => l.name);
+            const config = JSON.parse(
+              fs.readFileSync('.github/project-sync-config.json', 'utf8')
+            );
+
+            if (!labels.includes(config.triggerLabel)) {
+              core.info(`Skip: label "${config.triggerLabel}" not found`);
+              return;
+            }
+
+            const [owner, repo] = context.payload.repository.full_name.split('/');
+            const updates = await syncIssueToProject({
+              graphql: github.graphql,
+              config,
+              owner,
+              repo,
+              issueNumber: issue.number,
+              issueBody: issue.body ?? '',
+            });
+
+            if (updates.length === 0) {
+              core.warning('No project fields were updated. Check issue body format.');
+            } else {
+              core.info(`Updated: ${updates.join(', ')}`);
+            }
