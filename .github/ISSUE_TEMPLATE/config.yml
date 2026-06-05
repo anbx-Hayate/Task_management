@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 運用ルール（README）
+    url: https://github.com/anbx-Hayate/Task_management#運用ルール
+    about: タスク管理の運用フロー・Projects 設定手順は README を参照
