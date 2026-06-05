@@ -1,0 +1,43 @@
+query($viewId: ID!) {
+  node(id: $viewId) {
+    ... on ProjectV2View {
+      id
+      name
+      layout
+      number
+      filter
+      verticalGroupByFields(first: 10) {
+        nodes {
+          ... on ProjectV2FieldCommon {
+            field {
+              ... on ProjectV2Field {
+                id
+                name
+              }
+              ... on ProjectV2SingleSelectField {
+                id
+                name
+              }
+            }
+          }
+        }
+      }
+      fields(first: 30) {
+        nodes {
+          ... on ProjectV2FieldCommon {
+            field {
+              ... on ProjectV2Field {
+                id
+                name
+              }
+              ... on ProjectV2SingleSelectField {
+                id
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+query($projectId: ID!) {
+  node(id: $projectId) {
+    ... on ProjectV2 {
+      id
+      title
+      views(first: 20) {
+        nodes {
+          id
+          name
+          layout
+          number
+        }
+      }
+    }
+  }
+}

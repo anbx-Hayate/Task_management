@@ -1,0 +1,35 @@
+query($viewId: ID!) {
+  node(id: $viewId) {
+    ... on ProjectV2View {
+      id
+      name
+      layout
+      number
+      filter
+      verticalGroupByFields(first: 10) {
+        nodes {
+          ... on ProjectV2FieldConfiguration {
+            id
+            name
+          }
+        }
+      }
+      groupByFields(first: 10) {
+        nodes {
+          ... on ProjectV2FieldConfiguration {
+            id
+            name
+          }
+        }
+      }
+      fields(first: 30) {
+        nodes {
+          ... on ProjectV2FieldConfiguration {
+            id
+            name
+          }
+        }
+      }
+    }
+  }
+}

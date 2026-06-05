@@ -62,14 +62,19 @@ GitHub CLI (`gh`) がインストール・認証済みの場合、`scripts/` 内
 | 完了日 | Date | （日付） | 実績把握 |
 | 振り返り済み | Single select | 未実施 / 実施済み | 大タスクの振り返り漏れ防止 |
 
-## 4. 推奨ビュー
+## 4. ビュー（設定済み）
 
-| ビュー名 | レイアウト | 設定 |
-|----------|------------|------|
-| 全体ボード | Board | グループ：Status |
-| 大タスク一覧 | Table | フィルタ：タスク階層 = 大タスク |
-| 今週の作業 | Board | フィルタ：タスク階層 = 小タスク、Status ≠ 完了 |
-| 工数・振り返り | Table | 表示列：予想時間・実時間（分）・予想との差異理由・完了日 |
+以下のビューは API 経由で作成済みです。詳細は [VIEW_SETUP.md](VIEW_SETUP.md) を参照。
+
+| ビュー名 | レイアウト | URL |
+|----------|------------|-----|
+| View 1（新・ボード） | Board | https://github.com/users/anbx-Hayate/projects/3/views/7 |
+| 全体ボード | Board | https://github.com/users/anbx-Hayate/projects/3/views/3 |
+| 大タスク一覧 | Table | https://github.com/users/anbx-Hayate/projects/3/views/4 |
+| 今週の作業 | Board | https://github.com/users/anbx-Hayate/projects/3/views/5 |
+| 工数・振り返り | Table | https://github.com/users/anbx-Hayate/projects/3/views/6 |
+
+ボードビューで Status 列を表示するには、ビューを開いて **Group by → Status** を選択してください。
 
 ## 5. ラベル作成
 

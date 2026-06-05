@@ -1,0 +1,11 @@
+query($viewId: ID!) {
+  node(id: $viewId) {
+    ... on ProjectV2View {
+      id
+      name
+      layout
+      number
+      fullDatabaseId
+    }
+  }
+}
