@@ -17,9 +17,10 @@ body:
         | ② | 届け先 |
         | ③ | 成功状態（相手のゴール） |
         | ④ | 成果物 |
-        | ⑤ | 振り返り（完了後に記入） |
+        | ⑤ | 期限 |
+        | ⑥ | 振り返り（完了後に記入） |
 
-        > **作成後：** 届け先・タスク階層・Status は **タスク管理ボードへ自動反映** されます。
+        > **作成後：** 届け先・期限・タスク階層・Status は **タスク管理ボードへ自動反映** されます。
 
   - type: markdown
     attributes:
@@ -125,7 +126,25 @@ body:
     attributes:
       value: |
         ---
-        ### ⑤ 振り返り
+        ### ⑤ 期限
+        **いつまでに完了させるか** を日付で設定します。
+        タスク管理ボードでは **カレンダーから選択・編集** できます。
+
+  - type: input
+    id: deadline
+    attributes:
+      label: "⑤ 期限"
+      description: "YYYY-MM-DD 形式で入力（例：2026-06-30）。ボード上ではカレンダーから変更できます。"
+      placeholder: "2026-06-30"
+    validations:
+      required: true
+      regex: '^\d{4}-\d{2}-\d{2}$'
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### ⑥ 振り返り
         > 全小タスク完了後に記入してください。作成時は空欄のままで構いません。
 
   - type: textarea
@@ -172,5 +191,5 @@ body:
       options:
         - label: "親の大タスクから Sub-Issue として中タスクを作成した"
           required: false
-        - label: "タスク管理ボードに届け先・タスク階層が反映された"
+        - label: "タスク管理ボードに届け先・期限・タスク階層が反映された"
           required: false

@@ -30,6 +30,10 @@ export async function getProjectFields(graphql, projectId) {
         ... on ProjectV2 {
           fields(first: 50) {
             nodes {
+              ... on ProjectV2Field {
+                id
+                name
+              }
               ... on ProjectV2SingleSelectField {
                 id
                 name
@@ -115,6 +119,22 @@ export async function setSingleSelectField(
   await graphql(sq(mutation), { projectId, itemId, fieldId, optionId });
 }
 
+export async function setDateField(graphql, projectId, itemId, fieldId, date) {
+  const mutation = `
+    mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $date: Date!) {
+      updateProjectV2ItemFieldValue(input: {
+        projectId: $projectId
+        itemId: $itemId
+        fieldId: $fieldId
+        value: { date: $date }
+      }) {
+        projectV2Item { id }
+      }
+    }
+  `;
+  await graphql(sq(mutation), { projectId, itemId, fieldId, date });
+}
+
 export async function syncIssueToProject({
   graphql,
   config,
@@ -129,12 +149,20 @@ export async function syncIssueToProject({
 
   const updates = [];
 
-  for (const { issueHeading, projectField } of config.parseFields) {
+  for (const { issueHeading, projectField, fieldType } of config.parseFields) {
     const value = parseIssueField(issueBody, issueHeading);
     if (!value) continue;
     const field = fieldMap.get(projectField);
     if (!field) continue;
-    const option = field.options.find((o) => o.name === value);
+
+    if (fieldType === "date") {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) continue;
+      await setDateField(graphql, config.projectId, itemId, field.id, value);
+      updates.push(`${projectField}=${value}`);
+      continue;
+    }
+
+    const option = field.options?.find((o) => o.name === value);
     if (!option) continue;
     await setSingleSelectField(
       graphql,

@@ -4,7 +4,8 @@
     {
       "triggerLabel": "大タスク",
       "parseFields": [
-        { "issueHeading": "② 届け先の種類", "projectField": "届け先" }
+        { "issueHeading": "② 届け先の種類", "projectField": "届け先" },
+        { "issueHeading": "⑤ 期限", "projectField": "期限", "fieldType": "date" }
       ],
       "defaults": [
         { "projectField": "タスク階層", "value": "大タスク" },

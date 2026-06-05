@@ -40,4 +40,11 @@ const largeTaskBody = `### ② 届け先の種類
 
 assert.equal(parseIssueField(largeTaskBody, "② 届け先の種類"), "上司");
 
+const deadlineBody = `### ⑤ 期限
+
+2026-06-30
+`;
+
+assert.equal(parseIssueField(deadlineBody, "⑤ 期限"), "2026-06-30");
+
 console.log("All parser tests passed.");

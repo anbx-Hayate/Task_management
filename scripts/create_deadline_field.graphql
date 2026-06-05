@@ -1,0 +1,12 @@
+mutation($projectId: ID!) {
+  createProjectV2Field(
+    input: { projectId: $projectId, dataType: DATE, name: "期限" }
+  ) {
+    projectV2Field {
+      ... on ProjectV2Field {
+        id
+        name
+      }
+    }
+  }
+}
