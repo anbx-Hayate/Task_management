@@ -1,0 +1,149 @@
+name: "小タスク"
+description: "実作業単位（工数管理の最小単位。親 Issue から Sub-Issue として作成）"
+title: "[小タスク] "
+labels: ["小タスク"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 小タスク作成ガイド
+
+        **実際に手を動かす作業単位** のテンプレートです。工数管理はこの単位で行います。
+
+        ### 作成手順
+        1. **親の中タスク Issue** を開く
+        2. **「Create sub-issue」** からこのテンプレートを選ぶ
+        3. 下の評価軸・予想時間を入力する
+        4. Projects で `タスク階層=小タスク`・`Status=未着手` を設定する
+
+        ### 作業の進め方
+        | タイミング | やること |
+        |---|---|
+        | 作業開始時 | Status →「着手中」 |
+        | 作業完了時 | `実時間（分）` を記入 → Status →「完了」 |
+        | 予想と差がある場合 | `予想との差異理由` を記入 |
+
+  - type: input
+    id: parent_issue
+    attributes:
+      label: "親の中タスク Issue 番号"
+      description: "例：#5 の場合は「5」と入力"
+      placeholder: "5"
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### 作業内容
+
+  - type: textarea
+    id: work_content
+    attributes:
+      label: "作業内容（必須）"
+      description: 何をすれば完了か。80点で一度見せる前提で書く
+      placeholder: |
+        例：
+        - 研修テキストから学習ポイントを5つ抽出する
+        - 構成案をA4 1枚で作成する
+        - スライド3枚を80点で作成して上司に確認する
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### タスク評価軸
+        優先順位と作業時間帯（午前＝頭を使う作業 / 午後＝機械的作業）の判断に使います。
+        Projects にも同じ値を設定してください。
+
+  - type: dropdown
+    id: impact
+    attributes:
+      label: "インパクト"
+      description: 重要度。大＝最優先で取り組むべき作業
+      options:
+        - 大
+        - 中
+        - 小
+    validations:
+      required: true
+
+  - type: dropdown
+    id: time_load
+    attributes:
+      label: "時間負荷"
+      description: 重い作業は午前中（頭が活性化している時間）に割り当てる
+      options:
+        - すぐ終わる
+        - 普通
+        - 重い
+    validations:
+      required: true
+
+  - type: dropdown
+    id: ease
+    attributes:
+      label: "気軽さ"
+      description: 楽な作業は午後（機械的な作業向き）に割り当てる
+      options:
+        - 楽
+        - 普通
+        - 気重
+    validations:
+      required: true
+
+  - type: dropdown
+    id: estimated_time
+    attributes:
+      label: "予想時間"
+      description: 作業前の見積もり。Projects にも同じ値を設定する
+      options:
+        - 15分
+        - 30分
+        - 1時間
+        - 3時間
+        - それ以上
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### 完了条件
+
+  - type: checkboxes
+    id: completion_criteria
+    attributes:
+      label: "作業完了時にチェック"
+      description: すべてチェックできたら Status を「完了」にする
+      options:
+        - label: "作業内容が完了した"
+          required: false
+        - label: "80点の成果物を関係者に共有した（必要な場合）"
+          required: false
+        - label: "Projects の「実時間（分）」を記入した"
+          required: false
+        - label: "予想と差があれば「予想との差異理由」を記入した"
+          required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### 作成後チェックリスト
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "作成後に確認すること"
+      options:
+        - label: "親の中タスクから Sub-Issue として作成した"
+          required: false
+        - label: "Projects の「タスク階層」を「小タスク」に設定した"
+          required: false
+        - label: "Projects にインパクト・時間負荷・気軽さ・予想時間を設定した"
+          required: false

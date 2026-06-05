@@ -1,5 +1,11 @@
 blank_issues_enabled: false
 contact_links:
-  - name: 運用ルール（README）
+  - name: "📖 テンプレートの使い方"
+    url: https://github.com/anbx-Hayate/Task_management/blob/main/docs/ISSUE_TEMPLATE_GUIDE.md
+    about: 大・中・小タスクの作成手順と記入例を確認する
+  - name: "📋 運用ルール（README）"
     url: https://github.com/anbx-Hayate/Task_management#運用ルール
-    about: タスク管理の運用フロー・Projects 設定手順は README を参照
+    about: タスク管理の運用フロー・Projects 設定手順
+  - name: "📊 Projects ボード"
+    url: https://github.com/users/anbx-Hayate/projects/3
+    about: タスク管理ボードを開く

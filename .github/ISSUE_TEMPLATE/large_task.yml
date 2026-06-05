@@ -1,0 +1,206 @@
+name: "大タスク"
+description: "背景・目的・届け先・成功状態を記入して、タスク全体を管理する"
+title: "[大タスク] "
+labels: ["大タスク"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 大タスク作成ガイド
+
+        作業を始める前に、**なぜやるか・誰のためか・どうなれば成功か** を明確にします。
+        各項目の下の入力欄に記入してください。
+
+        | ステップ | 内容 |
+        |:---:|---|
+        | ① | 背景・目的 |
+        | ② | 届け先 |
+        | ③ | 成功状態（相手のゴール） |
+        | ④ | 成果物 |
+        | ⑤ | 中タスク一覧（作成後に Sub-Issue で分解） |
+        | ⑥ | 振り返り（完了後に記入） |
+
+        > **作成後の作業：** Projects で `タスク階層=大タスク`・`Status=未着手` を設定してください。
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### ① 背景・目的
+        **なぜこのタスクを行うのか** を書きます。
+
+        ❌「資料を作る」
+        ⭕「上司が意思決定できる資料を作る」レベルまで意識する
+
+  - type: textarea
+    id: background
+    attributes:
+      label: "① 背景・目的（必須）"
+      description: 会社・チーム・自分にとっての意味を含めて記入
+      placeholder: |
+        例：
+        - なぜ今このタスクが必要なのか
+        - 現状の課題は何か
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### ② 届け先
+        **誰に成果物を届けるのか** を具体的に書きます。
+
+  - type: dropdown
+    id: recipient_type
+    attributes:
+      label: "② 届け先の種類"
+      options:
+        - 上司
+        - クライアント
+        - チーム
+        - 自分
+        - その他
+    validations:
+      required: true
+
+  - type: input
+    id: recipient_name
+    attributes:
+      label: "② 届け先（名前・役割）"
+      description: 誰に届けるかを具体的に
+      placeholder: "例：研修担当の上司 〇〇さん"
+    validations:
+      required: true
+
+  - type: input
+    id: recipient_relation
+    attributes:
+      label: "② 届け先との関係"
+      description: レビュー依頼先・報告先など
+      placeholder: "例：研修FBの提出先 / 週次報告先"
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### ③ 成功状態（相手のゴール）
+        **相手がどのような状態になれば成功か** を書きます。
+        自分の作業完了ではなく、相手のゴールで定義します。
+
+  - type: textarea
+    id: success_state
+    attributes:
+      label: "③ 成功状態（必須）"
+      description: 相手がどうなれば成功か。具体的な状態で書く
+      placeholder: |
+        例：
+        - 上司が「この方針で進めてよい」と判断できる
+        - 相手が資料を見て次のアクションを決められる
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### ④ 成果物
+        最終的に **何を納品するか** をチェックリスト形式で書きます。
+
+  - type: textarea
+    id: deliverables
+    attributes:
+      label: "④ 成果物（必須）"
+      description: "- [ ] 形式で記入すると進捗管理しやすいです"
+      placeholder: |
+        - [ ] 設計書
+        - [ ] プレゼン資料
+        - [ ] 運用マニュアル
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### ⑤ 中タスク一覧
+        大タスクを **成果物単位** に分解します。
+        Issue 作成後、各行を **Sub-Issue（中タスク）** として作成し、Issue 番号を追記してください。
+
+  - type: textarea
+    id: medium_tasks
+    attributes:
+      label: "⑤ 中タスク一覧"
+      description: 2〜5個程度に分解するのが目安です
+      value: |
+        | # | 中タスク名 | Status | 担当 | Sub-Issue |
+        |---|------------|--------|------|-----------|
+        | 1 | | 未着手 | | # |
+        | 2 | | 未着手 | | # |
+        | 3 | | 未着手 | | # |
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### ⑥ 振り返り
+        > 全小タスク完了後に記入してください。作成時は空欄のままで構いません。
+
+  - type: textarea
+    id: retrospective_good
+    attributes:
+      label: "何がうまくいったか"
+      placeholder: "- "
+    validations:
+      required: false
+
+  - type: textarea
+    id: retrospective_waste
+    attributes:
+      label: "何が無駄だったか"
+      placeholder: "- "
+    validations:
+      required: false
+
+  - type: textarea
+    id: retrospective_improve
+    attributes:
+      label: "次回どう改善するか"
+      placeholder: "- "
+    validations:
+      required: false
+
+  - type: textarea
+    id: time_summary
+    attributes:
+      label: "工数サマリー（完了後に記入）"
+      value: |
+        | 項目 | 値 |
+        |------|-----|
+        | 小タスク合計予想時間 | |
+        | 小タスク合計実時間（分） | |
+        | 主な差異理由 | |
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### 作成後チェックリスト
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "作成後に確認すること"
+      options:
+        - label: "Projects の「タスク階層」を「大タスク」に設定した"
+          required: false
+        - label: "Projects の「Status」を「未着手」に設定した"
+          required: false
+        - label: "中タスクを Sub-Issue として分解した"
+          required: false
